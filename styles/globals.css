@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html, body, #__next {
+    height: 100%;
+  }
+
+  :root{
+    --color-navy-900: #031026;
+    --color-navy-800: #072443;
+    --color-accent: #3b82f6;
+    --color-grad-start: #021124; /* deep navy-blue start */
+    --color-grad-mid: #0b254f;   /* mid blue for depth */
+    --color-grad-end: #0f3b66;   /* rich blue end */
+    --text-strong: #0f2642; /* primary high-contrast text color (light on dark background) */
+    --text-strong-accent: #10223d; /* slightly more saturated light color for accents */
+    --text-dark: #0f172a; /* dark ink for light surfaces */
+    --glass-bg: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+  }
+
+  body {
+    /* darker, layered blue gradient for the site background */
+    background-image: linear-gradient(180deg, var(--color-grad-start) 0%, var(--color-grad-mid) 60%, var(--color-grad-end) 100%);
+    background-attachment: fixed;
+    color: var(--text-strong);
+    font-family: Inter, Poppins, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* subtle drop shadow for cards */
+  .card {
+    background: var(--glass-bg);
+    border-radius: 1rem; /* rounded-2xl */
+    box-shadow: 0 8px 30px rgba(2,6,23,0.6);
+    border: 1px solid rgba(255,255,255,0.04);
+    /* ensure card text uses strong contrast (avoid muted shades) */
+    color: var(--text-strong);
+  }
+}
+
+/* Enforce high-contrast text for commonly used muted classes so nothing appears pale/near-white shades */
+.text-muted, .text-gray-600, .text-slate-500, .text-slate-300, .text-blue-100, .text-gray-700, .text-slate-600 {
+  color: var(--text-strong) !important;
+}
+
+/* strong text helper */
+.text-strong { color: var(--text-strong) !important; }
+.text-strong-accent { color: var(--text-strong-accent) !important; }
+
+/* Dark text utilities (use on elements that need a visible dark color) */
+.text-dark {
+  color: var(--text-dark) !important;
+}
+.text-contrast {
+  color: var(--text-dark);
+  text-shadow: 0 1px 0 rgba(255,255,255,0.02);
+}
+
+@layer components {
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    background: linear-gradient(90deg, #2563eb 0%, #3730a3 100%);
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 6px 18px rgba(37,99,235,0.18);
+    transition: transform 180ms ease, box-shadow 180ms ease;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-3px) scale(1.01);
+    box-shadow: 0 10px 30px rgba(37,99,235,0.28);
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 px-3 py-1.5 rounded-md text-sm text-slate-200 border border-transparent hover:bg-white/5 transition;
+  }
+}
+
+@keyframes float-up {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+
+.animate-float {
+  animation: float-up 3s ease-in-out infinite;
+}
+
+/* glass effect */
+.glass {
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.04);
+}
+
+/* utility for soft borders */
+.soft-border {
+  border: 1px solid rgba(15, 23, 42, 0.06);
+}
